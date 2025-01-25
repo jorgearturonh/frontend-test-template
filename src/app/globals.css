@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .card {
+    @apply w-full space-y-3 rounded-2xl border-[#8F8F8F] bg-white p-6 shadow-sm;
+    border-width: 0.5px;
+  }
+}
