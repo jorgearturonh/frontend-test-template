@@ -1,10 +1,29 @@
 import { http, HttpResponse } from 'msw';
-import { allGames, availableFilters } from '@/utils/endpoint';
+import { allGames, availableFilters, delay } from '@/utils/endpoint';
 import { ITEMS_PER_PAGE } from '@/config/consts';
+import { GamesResponse } from '@/services/gameService';
+
+export const getGamesWithCustomResponseOnce = (override: Partial<GamesResponse>) =>
+  http.get('/api/games', () => HttpResponse.json({ ...override }), {
+    once: true,
+  });
+
+export const emulateLoading = () =>
+  http.get(
+    '/api/games',
+    async () => {
+      +console.log('emaulate loading');
+      await delay(5000000);
+      return HttpResponse.json({});
+    },
+    {
+      once: true,
+    }
+  );
 
 export const handlers = [
   http.get('/api/games', async ({ request }) => {
-    const url = new URL(request.url);
+    const url = new URL(request.url, 'http://localhost');
     const genre = url.searchParams.get('genre');
     let page = parseInt(url.searchParams.get('page') ?? '1');
 
@@ -30,4 +49,4 @@ export const handlers = [
       currentPage: page,
     });
   }),
-]; 
+];

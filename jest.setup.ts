@@ -2,15 +2,21 @@ import '@testing-library/jest-dom';
 import { server } from './src/mocks/setup';
 import React from 'react';
 
-// Establish API mocking before all tests.
-beforeAll(() => server.listen());
+const setupMsw = () => {
+  // Establish API mocking before all tests.
+  beforeAll(() =>
+    server.listen({
+      onUnhandledRequest: 'error',
+    })
+  );
 
-// Reset any request handlers that we may add during the tests,
-// so they don't affect other tests.
-afterEach(() => server.resetHandlers());
+  // Reset any request handlers that we may add during the tests,
+  // so they don't affect other tests.
+  afterEach(() => server.resetHandlers());
 
-// Clean up after the tests are finished.
-afterAll(() => server.close());
+  // Clean up after the tests are finished.
+  afterAll(() => server.close());
+};
 
 // Mock next/navigation
 jest.mock('next/navigation', () => ({
@@ -27,6 +33,8 @@ jest.mock('next/navigation', () => ({
     };
   },
 }));
+
+setupMsw();
 
 // Mock next/image
 jest.mock('next/image', () => ({
