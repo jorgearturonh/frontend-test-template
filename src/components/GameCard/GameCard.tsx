@@ -25,14 +25,7 @@ export const GameCard = ({ game, onCartUpdate }: GameCardProps) => {
   return (
     <div className="ml-product card">
       <div className="image-container">
-        <Image
-          src={game.image}
-          alt={game.name}
-          fill
-          sizes="(max-width: 768px) 100vw, 332px"
-          className="object-cover"
-          priority
-        />
+        <Image src={game.image} alt={game.name} fill className="object-cover" priority />
         {game.isNew && <span className="new-span">New</span>}
       </div>
 

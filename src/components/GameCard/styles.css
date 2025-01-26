@@ -6,7 +6,7 @@
     @apply h-[436px] w-[380px];
   }
   .new-span {
-    @apply absolute left-4 top-4 rounded bg-stone-100 px-4 py-1.5 text-sm font-[16px] text-[#3B3B3B] shadow-sm;
+    @apply text-stroke-primary absolute left-4 top-4 rounded bg-stone-100 px-4 py-1.5 text-sm font-[16px] shadow-sm;
     width: 57px;
     height: 32px;
   }
@@ -18,15 +18,15 @@
     @apply pt-1 text-[16px] font-bold uppercase text-neutral-600;
   }
   .game-name {
-    @apply text-[18px] font-semibold text-[#3B3B3B];
+    @apply text-stroke-primary text-[18px] font-semibold;
   }
   .game-name-hover {
-    @apply invisible absolute left-0 top-full z-10 mt-1 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm text-[#3B3B3B] opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100;
+    @apply text-stroke-primary invisible absolute left-0 top-full z-10 mt-1 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100;
   }
   .game-price {
-    @apply text-[20px] font-bold text-[#3B3B3B];
+    @apply text-stroke-primary text-[20px] font-bold;
   }
   .cart-button {
-    @apply w-full rounded-lg border border-[#3B3B3B] py-3.5 font-medium text-neutral-900 transition-colors hover:bg-neutral-50;
+    @apply border-stroke-primary w-full rounded-lg border py-3.5 font-bold text-neutral-900 transition-colors hover:bg-neutral-50;
   }
 }
