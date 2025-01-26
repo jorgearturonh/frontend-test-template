@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { useGetGames } from '@/hooks/useGetGames';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { GameCard, GameCardSkeleton } from '@/components/GameCard';
+import { Dropdown } from '@/components/Dropdown';
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -47,8 +48,7 @@ function HomeContent() {
     );
   }
 
-  const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newGenre = e.target.value;
+  const handleGenreChange = (newGenre: string) => {
     router.push(newGenre ? `?genre=${newGenre}` : '/');
   };
 
@@ -66,28 +66,13 @@ function HomeContent() {
           <h1 className="text-2xl font-bold text-gray-medium">Top Sellers</h1>
         </div>
         <div className="flex items-center gap-4 px-4 py-12">
-          <div className="ml-auto flex items-center gap-3">
-            <span className="text-[20px] font-bold text-gray-medium">Genre</span>
-            <div className="h-4 w-px bg-neutral-200"></div>
-            <select
+          <div className="ml-auto">
+            <Dropdown
               value={genre || ''}
               onChange={handleGenreChange}
-              className="w-[140px] cursor-pointer appearance-none bg-transparent pl-1 text-[20px] text-neutral-900 focus:outline-none"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23666666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 0 center',
-                backgroundSize: '16px',
-                paddingRight: '20px',
-              }}
-            >
-              <option value="">All</option>
-              {filters.map(filter => (
-                <option key={filter} value={filter}>
-                  {filter}
-                </option>
-              ))}
-            </select>
+              options={filters}
+              label="Genre"
+            />
           </div>
         </div>
 

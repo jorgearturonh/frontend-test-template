@@ -1,0 +1,52 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .dropdown-container {
+    @apply relative;
+  }
+
+  .dropdown-header {
+    @apply flex items-center gap-3;
+  }
+
+  .dropdown-label {
+    @apply text-xl font-bold text-gray-medium;
+  }
+
+  .dropdown-divider {
+    @apply h-4 w-px bg-neutral-200;
+  }
+
+  .dropdown-button {
+    @apply flex w-[205px] items-center justify-between pl-1 text-xl text-neutral-900 focus:outline-none;
+  }
+
+  .dropdown-arrow {
+    @apply h-5 w-5 transform text-neutral-600 transition-transform duration-200;
+  }
+
+  .dropdown-arrow-open {
+    @apply rotate-180;
+  }
+
+  .dropdown-menu {
+    @apply absolute right-0 z-10 mt-2 w-[205px] rounded-lg border border-neutral-200 bg-white py-1 shadow-lg;
+  }
+
+  .dropdown-menu-content {
+    @apply max-h-60 overflow-auto;
+  }
+
+  .dropdown-item {
+    @apply w-full px-4 py-2 text-left text-sm transition-all hover:bg-neutral-100;
+  }
+
+  .dropdown-item-selected {
+    @apply bg-white font-semibold;
+  }
+
+  .dropdown-item-not-selected {
+    @apply bg-neutral-50 hover:bg-neutral-100;
+  }
+}

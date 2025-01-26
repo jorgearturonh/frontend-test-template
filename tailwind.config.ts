@@ -20,6 +20,9 @@ const config: Config = {
       colors: {
         'stroke-secondary': '##8F8F8F',
         'stroke-primary': '#3B3B3B',
+        gray: {
+          medium: '#585660',
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
