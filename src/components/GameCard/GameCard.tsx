@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Game } from '@/types';
 import { cartService } from '@/services/cartService';
-import './styles.css';
+import './GameCard.css';
 const MAX_LENGTH = 24;
 
 interface GameCardProps {
@@ -23,7 +23,7 @@ export const GameCard = ({ game, onCartUpdate }: GameCardProps) => {
   };
 
   return (
-    <div className="ml-product card">
+    <div className="card product">
       <div className="image-container">
         <Image src={game.image} alt={game.name} fill className="object-cover" priority />
         {game.isNew && <span className="new-span">New</span>}

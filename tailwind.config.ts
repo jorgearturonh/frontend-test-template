@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        // Keep default sizes and add custom ones
+        sm: ['0.875rem', '1.25rem'], // 14px
+        base: ['1rem', '1.5rem'], // 16px
+        lg: ['1.125rem', '1.75rem'], // 18px
+        xl: ['1.25rem', '1.75rem'], // 20px
+        'game-title': ['1.125rem', '1.75rem'], // 18px
+        price: ['1.25rem', '1.75rem'], // 20px
+      },
       colors: {
         'stroke-secondary': '##8F8F8F',
         'stroke-primary': '#3B3B3B',

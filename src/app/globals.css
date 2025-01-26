@@ -7,4 +7,7 @@
     @apply border-stroke-secondary w-full space-y-3 rounded-2xl bg-white p-6 shadow-sm;
     border-width: 0.5px;
   }
+  .product {
+    @apply h-[436px] w-[380px];
+  }
 }

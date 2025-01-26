@@ -3,28 +3,27 @@
 
 @layer components {
   .ml-product {
-    @apply h-[436px] w-[380px];
+    @apply h-[436px];
   }
   .new-span {
-    @apply text-stroke-primary absolute left-4 top-4 rounded bg-stone-100 px-4 py-1.5 text-sm font-[16px] shadow-sm;
+    @apply text-stroke-primary absolute left-4 top-4 rounded bg-stone-100 px-4 py-1.5 text-sm shadow-sm;
     width: 57px;
     height: 32px;
   }
   .image-container {
-    @apply relative w-full overflow-hidden rounded-t-2xl;
-    height: 240px; /* Fixed height */
+    @apply relative h-[240px] w-full overflow-hidden rounded-t-2xl;
   }
   .genre-text {
-    @apply pt-1 text-[16px] font-bold uppercase text-neutral-600;
+    @apply pt-1 text-base font-bold uppercase text-neutral-600;
   }
   .game-name {
-    @apply text-stroke-primary text-[18px] font-semibold;
+    @apply text-stroke-primary text-game-title font-semibold;
   }
   .game-name-hover {
     @apply text-stroke-primary invisible absolute left-0 top-full z-10 mt-1 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100;
   }
   .game-price {
-    @apply text-stroke-primary text-[20px] font-bold;
+    @apply text-stroke-primary text-price font-bold;
   }
   .cart-button {
     @apply border-stroke-primary w-full rounded-lg border py-3.5 font-bold text-neutral-900 transition-colors hover:bg-neutral-50;
