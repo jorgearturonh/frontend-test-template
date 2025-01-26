@@ -1,5 +1,7 @@
 import { allGames, availableFilters, delay } from '@/utils/endpoint';
-import { DELAY_MS, ITEMS_PER_PAGE } from '@/config/consts';
+import { ITEMS_PER_PAGE } from '@/config/consts';
+
+const API_DELAY_MS = 330;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -17,7 +19,7 @@ export async function GET(request: Request) {
   if (page < 1 || isNaN(page)) page = 1;
 
   // Mock delay
-  await delay(DELAY_MS);
+  await delay(API_DELAY_MS);
 
   // Paginate after filtering
   const fromIndex = (page - 1) * ITEMS_PER_PAGE;
