@@ -14,7 +14,7 @@
     @apply relative h-[240px] w-full overflow-hidden rounded-t-2xl;
   }
   .genre-text {
-    @apply text-ag pt-1 font-bold uppercase text-neutral-600;
+    @apply pt-1 text-ag font-bold uppercase text-neutral-600;
   }
   .game-name {
     @apply text-lg font-semibold text-stroke-primary;

@@ -81,7 +81,7 @@ const CartPage = () => {
         <div className="mb-8">
           <Link
             href="/"
-            className="text-ag flex items-center gap-2 text-stroke-primary hover:text-neutral-900"
+            className="flex items-center gap-2 text-ag text-stroke-primary hover:text-neutral-900"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +222,7 @@ const CartPage = () => {
                 </div>
                 <button
                   onClick={() => setIsCheckoutModalOpen(true)}
-                  className="text-ag bg-cta-fill-primary mt-6 w-full rounded-lg py-3 text-white transition-colors hover:bg-[#4a4852]"
+                  className="mt-6 w-full rounded-lg bg-cta-fill-primary py-3 text-ag text-white transition-colors hover:bg-[#4a4852]"
                 >
                   Checkout
                 </button>
