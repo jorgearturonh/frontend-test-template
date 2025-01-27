@@ -7,6 +7,7 @@ import { Game } from '@/types';
 import { cartService } from '@/services/cartService';
 import { CheckoutModal } from '@/components/CheckoutModal/CheckoutModal';
 import { motion } from 'framer-motion';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 const EmptyCart = () => {
   return (
@@ -103,12 +104,7 @@ const CartPage = () => {
         <h1 className="mb-2 text-xl font-bold md:text-2xl">Your Cart</h1>
 
         {isLoading ? (
-          <div
-            data-testid="loading-spinner"
-            className="flex min-h-[400px] items-center justify-center"
-          >
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-neutral-200 border-t-[#585660]"></div>
-          </div>
+          <LoadingSpinner />
         ) : cartItems?.length === 0 ? (
           <EmptyCart />
         ) : (
@@ -134,14 +130,8 @@ const CartPage = () => {
                   >
                     {/* Image and Remove Button Row */}
                     <div className="flex w-full gap-4 md:w-[256px]">
-                      <div className="relative h-[200px] w-full md:h-[156px]">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 256px"
-                        />
+                      <div className="relative h-[200px] w-[259px] md:h-[156px] md:w-[256px]">
+                        <Image src={item.image} alt={item.name} fill className="object-cover" />
                         {item.isNew && (
                           <span className="absolute left-4 top-4 rounded bg-stone-100 px-4 py-1.5 text-sm font-medium text-neutral-900 shadow-sm">
                             New
