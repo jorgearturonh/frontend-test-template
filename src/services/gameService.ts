@@ -1,4 +1,5 @@
 import { Game } from '@/types';
+import { env } from '@/config/env';
 
 export interface GamesResponse {
   games: Game[];
@@ -17,7 +18,7 @@ export const gameService = {
     if (genre) queryParams.append('genre', genre);
     queryParams.append('page', page.toString());
 
-    const response = await fetch(`/api/games?${queryParams.toString()}`, {
+    const response = await fetch(`${env.apiUrl}/games?${queryParams.toString()}`, {
       next: { revalidate: 60 }, // Cache for 60 seconds
     });
 

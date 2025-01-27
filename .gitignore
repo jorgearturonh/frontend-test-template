@@ -39,3 +39,7 @@ next-env.d.ts
 .idea
 .vscode
 yarn.lock
+
+# Add these lines to your existing .gitignore
+.env*
+!.env.example

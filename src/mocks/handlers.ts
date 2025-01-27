@@ -2,17 +2,17 @@ import { http, HttpResponse } from 'msw';
 import { allGames, availableFilters, delay } from '@/utils/endpoint';
 import { ITEMS_PER_PAGE } from '@/config/consts';
 import { GamesResponse } from '@/services/gameService';
+import { env } from '@/config/env';
 
 export const getGamesWithCustomResponseOnce = (override: Partial<GamesResponse>) =>
-  http.get('/api/games', () => HttpResponse.json({ ...override }), {
+  http.get(`${env.apiUrl}/games`, () => HttpResponse.json({ ...override }), {
     once: true,
   });
 
 export const emulateLoading = () =>
   http.get(
-    '/api/games',
+    `${env.apiUrl}/games`,
     async () => {
-      +console.log('emaulate loading');
       await delay(5000000);
       return HttpResponse.json({});
     },
@@ -22,8 +22,8 @@ export const emulateLoading = () =>
   );
 
 export const handlers = [
-  http.get('/api/games', async ({ request }) => {
-    const url = new URL(request.url, 'http://localhost');
+  http.get(`${env.apiUrl}/games`, async ({ request }) => {
+    const url = new URL(request.url);
     const genre = url.searchParams.get('genre');
     let page = parseInt(url.searchParams.get('page') ?? '1');
 
