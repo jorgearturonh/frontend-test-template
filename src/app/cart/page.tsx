@@ -134,14 +134,8 @@ const CartPage = () => {
                   >
                     {/* Image and Remove Button Row */}
                     <div className="flex w-full gap-4 md:w-[256px]">
-                      <div className="relative h-[200px] w-full md:h-[156px]">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 256px"
-                        />
+                      <div className="relative h-[200px] w-[259px] md:h-[156px] md:w-[256px]">
+                        <Image src={item.image} alt={item.name} fill className="object-cover" />
                         {item.isNew && (
                           <span className="absolute left-4 top-4 rounded bg-stone-100 px-4 py-1.5 text-sm font-medium text-neutral-900 shadow-sm">
                             New
