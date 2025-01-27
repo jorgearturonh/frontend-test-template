@@ -20,6 +20,7 @@ const config: Config = {
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.test.{js,jsx,ts,tsx}',
     '!src/**/index.{js,jsx,ts,tsx}',
+    '!src/mocks/**/*',
   ],
   coverageThreshold: {
     global: {
