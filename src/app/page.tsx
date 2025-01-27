@@ -110,7 +110,7 @@ function HomeContent() {
         {!isReachingEnd && !isLoadingMore && (
           <button
             onClick={handleLoadMore}
-            className="w-[137px] rounded-lg bg-[#585660] py-3 font-medium uppercase text-white transition-colors"
+            className="w-full rounded-lg bg-[#585660] py-3 font-medium uppercase text-white transition-colors md:w-[137px]"
           >
             See More
           </button>

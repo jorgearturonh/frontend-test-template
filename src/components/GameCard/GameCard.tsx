@@ -25,7 +25,7 @@ export const GameCard = ({ game, onCartUpdate }: GameCardProps) => {
   return (
     <div className="card product">
       <div className="image-container">
-        <Image src={game.image} alt={game.name} fill className="object-cover" priority />
+        <Image src={game.image} alt={game.name} fill={true} className="object-cover" priority />
         {game.isNew && <span className="new-span">New</span>}
       </div>
 
