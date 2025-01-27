@@ -63,10 +63,12 @@ function HomeContent() {
     <main className="min-h-screen bg-neutral-50">
       <div className="container mx-auto max-w-7xl px-4 py-8">
         <div className="">
-          <h1 className="text-2xl font-bold text-gray-medium">Top Sellers</h1>
+          <h1 className="text-2xl font-bold uppercase text-gray-medium md:normal-case">
+            Top Sellers
+          </h1>
         </div>
-        <div className="flex items-center gap-4 px-4 py-12">
-          <div className="ml-auto">
+        <div className="flex flex-col items-center gap-4 px-4 py-12 md:flex-row">
+          <div className="w-full md:ml-auto md:w-auto">
             <Dropdown
               value={genre || ''}
               onChange={handleGenreChange}

@@ -6,8 +6,9 @@ import Image from 'next/image';
 import { Game } from '@/types';
 import { cartService } from '@/services/cartService';
 import { CheckoutModal } from '@/components/CheckoutModal/CheckoutModal';
+import { motion } from 'framer-motion';
 
-function EmptyCart() {
+const EmptyCart = () => {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
       <div className="mb-6 text-neutral-400">
@@ -27,7 +28,7 @@ function EmptyCart() {
         </svg>
       </div>
       <h2 className="mb-4 text-2xl font-bold text-neutral-900">Your cart is empty</h2>
-      <p className="mb-8 text-neutral-600">Looks like you haven't added any games yet.</p>
+      <p className="mb-8 text-neutral-600">Looks like you haven&apos;t added any games yet.</p>
       <Link
         href="/"
         className="inline-flex items-center gap-2 rounded-lg bg-[#585660] px-6 py-3 font-medium text-white transition-colors hover:bg-[#4a4852]"
@@ -46,17 +47,27 @@ function EmptyCart() {
       </Link>
     </div>
   );
-}
+};
 
-export default function CartPage() {
+const LoadingSpinner = () => {
+  return (
+    <div className="flex min-h-[400px] items-center justify-center">
+      <div className="h-12 w-12 animate-spin rounded-full border-4 border-neutral-200 border-t-[#585660]"></div>
+    </div>
+  );
+};
+
+const CartPage = () => {
   const [cartItems, setCartItems] = useState<Game[]>([]);
   const [total, setTotal] = useState(0);
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const updateCart = () => {
       setCartItems(cartService.getCart());
       setTotal(cartService.getCartTotal());
+      setIsLoading(false);
     };
 
     const unsubscribe = cartService.subscribe(updateCart);
@@ -77,7 +88,7 @@ export default function CartPage() {
         <div className="mb-8">
           <Link
             href="/"
-            className="flex items-center gap-2 text-neutral-600 hover:text-neutral-900"
+            className="flex items-center gap-2 text-base text-neutral-600 hover:text-neutral-900"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -97,82 +108,134 @@ export default function CartPage() {
           </Link>
         </div>
 
-        <h1 className="mb-8 text-2xl font-bold">Your Cart</h1>
+        <h1 className="mb-2 text-[36px] font-bold">Your Cart</h1>
 
-        {cartItems.length === 0 ? (
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : cartItems.length === 0 ? (
           <EmptyCart />
         ) : (
           <>
-            <p className="mb-8">{cartItems.length} items</p>
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-              <div className="lg:col-span-2">
+            <p className="mb-12 text-[24px] font-normal text-stroke-primary">
+              {cartItems.length} items
+            </p>
+            <div className="grid grid-cols-1 gap-16 lg:grid-cols-7">
+              <div className="lg:col-span-4">
                 {cartItems.map(item => (
-                  <div
+                  <motion.div
                     key={item.id}
-                    className="mb-4 flex items-start gap-4 rounded-lg bg-white p-4 shadow-sm"
+                    layout
+                    initial={{ opacity: 1 }}
+                    exit={{
+                      opacity: 0,
+                      height: 0,
+                      marginBottom: 0,
+                      padding: 0,
+                      transition: { duration: 0.3 },
+                    }}
+                    className="relative mb-8 flex flex-col border-b border-solid p-4 md:mb-4 md:flex-row md:gap-4"
                   >
-                    <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg">
-                      <Image src={item.image} alt={item.name} fill className="object-cover" />
-                    </div>
-                    <div className="flex-grow">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h3 className="font-semibold">{item.name}</h3>
-                          <p className="text-sm text-neutral-600">{item.genre}</p>
-                          <p className="mt-1 text-sm text-neutral-600">{item.description}</p>
-                        </div>
-                        <div className="flex items-center gap-4">
-                          <span className="font-semibold">${item.price}</span>
-                          <button
-                            onClick={() => handleRemoveItem(item.id)}
-                            className="text-neutral-400 hover:text-neutral-900"
+                    {/* Image and Remove Button Row */}
+                    <div className="flex w-full gap-4 md:w-[256px]">
+                      <div className="relative h-[200px] w-full md:h-[156px]">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 256px"
+                        />
+                      </div>
+                      <div className="flex-shrink-0 md:hidden">
+                        <button
+                          onClick={() => handleRemoveItem(item.id)}
+                          className="text-neutral-400 hover:text-neutral-900"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="h-5 w-5"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="h-5 w-5"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                              />
-                            </svg>
-                          </button>
-                        </div>
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     </div>
-                  </div>
+
+                    {/* Content Column */}
+                    <div className="mt-4 flex-grow space-y-2 md:mt-0">
+                      <p className="text-[16px] font-bold uppercase text-neutral-600">
+                        {item.genre}
+                      </p>
+                      <h3 className="text-[20px] font-semibold text-stroke-primary">{item.name}</h3>
+                      <p className="text-[16px] text-[#737373]">{item.description}</p>
+                      <div className="flex justify-end">
+                        <span className="text-[20px] text-price font-bold">${item.price}</span>
+                      </div>
+                    </div>
+
+                    {/* Desktop Remove Button */}
+                    <div className="hidden flex-shrink-0 md:block">
+                      <button
+                        onClick={() => handleRemoveItem(item.id)}
+                        className="text-neutral-400 hover:text-neutral-900"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="h-5 w-5"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
 
-              <div className="lg:col-span-1">
-                <div className="rounded-lg bg-white p-6 shadow-sm">
-                  <h2 className="mb-4 text-lg font-semibold">Order Summary</h2>
-                  <div className="space-y-2">
+              <div className="lg:col-span-3">
+                <div className="card rounded-lg p-6 shadow-sm">
+                  <h2 className="text-[24px] font-semibold">Order Summary</h2>
+                  <p className="text-[18px] font-normal text-stroke-primary">
+                    {cartItems.length} items
+                  </p>
+                  <div className="space-y-2 pt-8">
                     {cartItems.map(item => (
-                      <div key={item.id} className="flex justify-between text-sm">
-                        <span>{item.name}</span>
-                        <span>${item.price}</span>
+                      <div key={item.id} className="flex justify-between pb-2 text-sm">
+                        <span className="text-[18px] font-normal text-[#3B3B3B]">{item.name}</span>
+                        <span className="text-[18px] font-normal text-[#3B3B3B]">
+                          ${item.price}
+                        </span>
                       </div>
                     ))}
                   </div>
                   <div className="mt-4 border-t pt-4">
                     <div className="flex justify-between font-semibold">
-                      <span>Order Total</span>
-                      <span>${total.toFixed(2)}</span>
+                      <span className="text-[20px]">Order Total</span>
+                      <span className="text-[20px]">${total.toFixed(2)}</span>
                     </div>
                   </div>
-                  <button
-                    onClick={() => setIsCheckoutModalOpen(true)}
-                    className="mt-6 w-full rounded-lg bg-[#585660] py-3 font-medium text-white transition-colors hover:bg-[#4a4852]"
-                  >
-                    Checkout
-                  </button>
                 </div>
+                <button
+                  onClick={() => setIsCheckoutModalOpen(true)}
+                  className="mt-6 w-full rounded-lg bg-[#585660] py-3 font-[16px] text-white transition-colors hover:bg-[#4a4852]"
+                >
+                  Checkout
+                </button>
               </div>
             </div>
           </>
@@ -186,4 +249,6 @@ export default function CartPage() {
       />
     </main>
   );
-}
+};
+
+export default CartPage;
