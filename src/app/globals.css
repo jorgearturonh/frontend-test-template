@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .card {
+    @apply w-full space-y-3 rounded-2xl border-[0.5px] border-stroke-secondary p-6 shadow-sm;
+  }
+  .product {
+    @apply h-[436px] w-[380px];
+  }
+}
