@@ -21,7 +21,7 @@ export default function Navbar() {
     <nav className="bg-[#EEE]">
       <div className="container mx-auto max-w-7xl px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-neutral-900">
+          <Link href="/" className="text-[24px] font-bold text-[#585660]">
             GamerShop
           </Link>
           <Link

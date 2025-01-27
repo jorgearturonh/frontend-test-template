@@ -49,14 +49,6 @@ const EmptyCart = () => {
   );
 };
 
-const LoadingSpinner = () => {
-  return (
-    <div className="flex min-h-[400px] items-center justify-center">
-      <div className="h-12 w-12 animate-spin rounded-full border-4 border-neutral-200 border-t-[#585660]"></div>
-    </div>
-  );
-};
-
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<Game[]>([]);
   const [total, setTotal] = useState(0);
@@ -111,8 +103,13 @@ const CartPage = () => {
         <h1 className="mb-2 text-xl font-bold md:text-2xl">Your Cart</h1>
 
         {isLoading ? (
-          <LoadingSpinner />
-        ) : cartItems.length === 0 ? (
+          <div
+            data-testid="loading-spinner"
+            className="flex min-h-[400px] items-center justify-center"
+          >
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-neutral-200 border-t-[#585660]"></div>
+          </div>
+        ) : cartItems?.length === 0 ? (
           <EmptyCart />
         ) : (
           <>

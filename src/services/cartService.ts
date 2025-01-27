@@ -6,7 +6,6 @@ const listeners = new Set<() => void>();
 
 export const cartService = {
   getCart(): Game[] {
-    if (typeof window === 'undefined') return [];
     const cart = localStorage.getItem(CART_STORAGE_KEY);
     return cart ? JSON.parse(cart) : [];
   },

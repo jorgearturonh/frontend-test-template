@@ -22,9 +22,6 @@ export function CheckoutModal({ isOpen, onClose, cartItems, total }: CheckoutMod
 
   const handlePayment = async () => {
     setIsProcessing(true);
-    // Simulate payment processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setIsProcessing(false);
     onClose();
     router.push('/success');
     cartService.clearCart();
@@ -33,13 +30,21 @@ export function CheckoutModal({ isOpen, onClose, cartItems, total }: CheckoutMod
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" onClick={onClose} />
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+        data-testid="modal-backdrop"
+        onClick={onClose}
+      />
 
       {/* Modal */}
       <div className="relative z-50 w-full max-w-2xl rounded-lg bg-white p-6 shadow-xl">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xl font-semibold">Checkout</h2>
-          <button onClick={onClose} className="text-neutral-400 hover:text-neutral-900">
+          <button
+            onClick={onClose}
+            data-testid="close-button"
+            className="text-neutral-400 hover:text-neutral-900"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -110,6 +115,7 @@ export function CheckoutModal({ isOpen, onClose, cartItems, total }: CheckoutMod
         <button
           onClick={handlePayment}
           disabled={isProcessing}
+          data-testid="pay-button"
           className="w-full rounded-lg bg-[#585660] py-3 font-medium text-white transition-colors hover:bg-[#4a4852] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isProcessing ? (

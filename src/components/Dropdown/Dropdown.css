@@ -31,7 +31,7 @@
   }
 
   .dropdown-menu {
-    @apply absolute right-0 z-10 mt-2 w-[205px] rounded-lg border border-neutral-200 bg-white py-1 shadow-lg;
+    @apply absolute right-0 z-10 mt-2 w-full rounded-lg border border-neutral-200 bg-white py-1 shadow-lg md:w-[205px];
   }
 
   .dropdown-menu-content {

@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@/utils/test-utils';
 import { CheckoutModal } from './CheckoutModal';
+import { mockGames } from '@/test/mocks';
 
 // Mock cartService
 jest.mock('@/services/cartService', () => ({
@@ -16,26 +17,7 @@ jest.mock('next/navigation', () => ({
   }),
 }));
 
-const mockCartItems = [
-  {
-    id: '1',
-    name: 'Test Game 1',
-    description: 'Test Description 1',
-    price: 59.99,
-    genre: 'Action',
-    image: '/test1.jpg',
-    isNew: true,
-  },
-  {
-    id: '2',
-    name: 'Test Game 2',
-    description: 'Test Description 2',
-    price: 49.99,
-    genre: 'RPG',
-    image: '/test2.jpg',
-    isNew: false,
-  },
-];
+const mockCartItems = mockGames;
 
 describe('CheckoutModal', () => {
   const mockProps = {
@@ -65,10 +47,57 @@ describe('CheckoutModal', () => {
     expect(screen.getByAltText('Mercado Pago')).toBeInTheDocument();
 
     // Check cart items
-    expect(screen.getByText('Test Game 1')).toBeInTheDocument();
-    expect(screen.getByText('Test Game 2')).toBeInTheDocument();
+    expect(screen.getByText('Game 1')).toBeInTheDocument();
+    expect(screen.getByText('Game 2')).toBeInTheDocument();
 
     // Check total
     expect(screen.getByText('$109.98')).toBeInTheDocument();
+  });
+
+  it('handles payment method selection', () => {
+    render(<CheckoutModal {...mockProps} />);
+
+    // Initially should show Stripe as default
+    expect(screen.getByText('Pay with Stripe')).toBeInTheDocument();
+
+    // Click Mercado Pago button
+    fireEvent.click(screen.getByAltText('Mercado Pago'));
+    expect(screen.getByText('Pay with Mercado Pago')).toBeInTheDocument();
+
+    // Click Stripe button
+    fireEvent.click(screen.getByAltText('Stripe'));
+    expect(screen.getByText('Pay with Stripe')).toBeInTheDocument();
+  });
+
+  it('handles payment processing flow', async () => {
+    render(<CheckoutModal {...mockProps} />);
+
+    const payButton = screen.getByTestId('pay-button');
+    expect(payButton).toBeInTheDocument();
+    expect(payButton).toHaveTextContent('Pay with Stripe');
+    fireEvent.click(payButton);
+
+    // Check loading state
+    expect(screen.getByText('Processing...')).toBeInTheDocument();
+    expect(payButton).toBeDisabled();
+
+    expect(mockPush).toHaveBeenCalledTimes(1);
+    expect(mockProps.onClose).toHaveBeenCalled();
+
+    jest.useRealTimers();
+  });
+
+  it('closes modal when clicking backdrop', () => {
+    render(<CheckoutModal {...mockProps} />);
+
+    fireEvent.click(screen.getByTestId('modal-backdrop'));
+    expect(mockProps.onClose).toHaveBeenCalled();
+  });
+
+  it('closes modal when clicking close button', () => {
+    render(<CheckoutModal {...mockProps} />);
+
+    fireEvent.click(screen.getByTestId('close-button'));
+    expect(mockProps.onClose).toHaveBeenCalled();
   });
 });
