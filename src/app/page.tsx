@@ -63,11 +63,11 @@ function HomeContent() {
     <main className="min-h-screen bg-neutral-50">
       <div className="container mx-auto max-w-7xl px-4 py-8">
         <div className="">
-          <h1 className="text-2xl font-bold uppercase text-gray-medium md:normal-case">
+          <h1 className="text-xl font-bold uppercase text-gray-medium md:text-2xl md:normal-case">
             Top Sellers
           </h1>
         </div>
-        <div className="flex flex-col items-center gap-4 px-4 py-12 md:flex-row">
+        <div className="flex flex-col gap-4 py-10">
           <div className="w-full md:ml-auto md:w-auto">
             <Dropdown
               value={genre || ''}
@@ -77,8 +77,9 @@ function HomeContent() {
             />
           </div>
         </div>
-
-        {/* Content */}
+      </div>
+      <div className="h-px w-full bg-neutral-200" />
+      <div className="container mx-auto max-w-7xl px-4">
         <div className="mx-auto grid grid-cols-1 justify-items-center gap-14 py-12 md:grid-cols-2 lg:grid-cols-3">
           {isLoading ? (
             // Show 6 skeleton cards during initial loading without animation
@@ -105,12 +106,11 @@ function HomeContent() {
             </>
           )}
         </div>
-
         {/* See More button */}
         {!isReachingEnd && !isLoadingMore && (
           <button
             onClick={handleLoadMore}
-            className="w-full rounded-lg bg-[#585660] py-3 font-medium uppercase text-white transition-colors md:w-[137px]"
+            className="mb-9 w-full rounded-lg bg-[#585660] py-3 font-medium uppercase text-white transition-colors md:w-[137px]"
           >
             See More
           </button>

@@ -30,7 +30,7 @@ export const GameCard = ({ game, onCartUpdate }: GameCardProps) => {
       </div>
 
       <p className="genre-text">{game.genre}</p>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pb-3">
         <div className="group relative">
           <h2 className="game-name">
             {exceedsMaxLength ? `${game.name.slice(0, MAX_LENGTH)}...` : game.name}

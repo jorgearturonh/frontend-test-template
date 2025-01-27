@@ -44,7 +44,7 @@ export default function Navbar() {
                 />
               </svg>
               {cartCount > 0 && (
-                <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[14px] text-white">
                   {cartCount}
                 </span>
               )}

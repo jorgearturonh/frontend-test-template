@@ -88,7 +88,7 @@ const CartPage = () => {
         <div className="mb-8">
           <Link
             href="/"
-            className="flex items-center gap-2 text-base text-neutral-600 hover:text-neutral-900"
+            className="text-ag flex items-center gap-2 text-stroke-primary hover:text-neutral-900"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +108,7 @@ const CartPage = () => {
           </Link>
         </div>
 
-        <h1 className="mb-2 text-[36px] font-bold">Your Cart</h1>
+        <h1 className="mb-2 text-xl font-bold md:text-2xl">Your Cart</h1>
 
         {isLoading ? (
           <LoadingSpinner />
@@ -116,7 +116,7 @@ const CartPage = () => {
           <EmptyCart />
         ) : (
           <>
-            <p className="mb-12 text-[24px] font-normal text-stroke-primary">
+            <p className="mb-12 text-xs font-normal text-stroke-primary md:text-xl">
               {cartItems.length} items
             </p>
             <div className="grid grid-cols-1 gap-16 lg:grid-cols-7">
@@ -145,6 +145,11 @@ const CartPage = () => {
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 256px"
                         />
+                        {item.isNew && (
+                          <span className="absolute left-4 top-4 rounded bg-stone-100 px-4 py-1.5 text-sm font-medium text-neutral-900 shadow-sm">
+                            New
+                          </span>
+                        )}
                       </div>
                       <div className="flex-shrink-0 md:hidden">
                         <button
@@ -171,13 +176,11 @@ const CartPage = () => {
 
                     {/* Content Column */}
                     <div className="mt-4 flex-grow space-y-2 md:mt-0">
-                      <p className="text-[16px] font-bold uppercase text-neutral-600">
-                        {item.genre}
-                      </p>
-                      <h3 className="text-[20px] font-semibold text-stroke-primary">{item.name}</h3>
-                      <p className="text-[16px] text-[#737373]">{item.description}</p>
+                      <p className="text-ag font-bold uppercase text-neutral-600">{item.genre}</p>
+                      <h3 className="text-xs font-bold text-stroke-primary">{item.name}</h3>
+                      <p className="text-ag text-neutral-500">{item.description}</p>
                       <div className="flex justify-end">
-                        <span className="text-[20px] text-price font-bold">${item.price}</span>
+                        <span className="text-xs font-bold">${item.price}</span>
                       </div>
                     </div>
 
@@ -209,15 +212,15 @@ const CartPage = () => {
 
               <div className="lg:col-span-3">
                 <div className="card rounded-lg p-6 shadow-sm">
-                  <h2 className="text-[24px] font-semibold">Order Summary</h2>
-                  <p className="text-[18px] font-normal text-stroke-primary">
+                  <h2 className="text-xl font-bold">Order Summary</h2>
+                  <p className="text-lg font-normal text-stroke-primary">
                     {cartItems.length} items
                   </p>
                   <div className="space-y-2 pt-8">
                     {cartItems.map(item => (
                       <div key={item.id} className="flex justify-between pb-2 text-sm">
-                        <span className="text-[18px] font-normal text-[#3B3B3B]">{item.name}</span>
-                        <span className="text-[18px] font-normal text-[#3B3B3B]">
+                        <span className="text-lg font-normal text-stroke-primary">{item.name}</span>
+                        <span className="text-lg font-normal text-stroke-primary">
                           ${item.price}
                         </span>
                       </div>
@@ -225,14 +228,14 @@ const CartPage = () => {
                   </div>
                   <div className="mt-4 border-t pt-4">
                     <div className="flex justify-between font-semibold">
-                      <span className="text-[20px]">Order Total</span>
-                      <span className="text-[20px]">${total.toFixed(2)}</span>
+                      <span className="text-xs font-bold">Order Total</span>
+                      <span className="text-xs font-bold">${total.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={() => setIsCheckoutModalOpen(true)}
-                  className="mt-6 w-full rounded-lg bg-[#585660] py-3 font-[16px] text-white transition-colors hover:bg-[#4a4852]"
+                  className="text-ag bg-cta-fill-primary mt-6 w-full rounded-lg py-3 text-white transition-colors hover:bg-[#4a4852]"
                 >
                   Checkout
                 </button>

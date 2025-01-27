@@ -11,15 +11,15 @@
   }
 
   .dropdown-label {
-    @apply text-xl font-bold text-gray-medium;
+    @apply text-xs font-bold text-gray-medium;
   }
 
   .dropdown-divider {
-    @apply h-4 w-px bg-neutral-200;
+    @apply h-4 w-px bg-stroke-primary;
   }
 
   .dropdown-button {
-    @apply flex w-[205px] items-center justify-between pl-1 text-xl text-neutral-900 focus:outline-none;
+    @apply flex w-full items-center justify-between pl-1 text-xs text-neutral-900 focus:outline-none md:w-[205px];
   }
 
   .dropdown-arrow {
@@ -39,7 +39,7 @@
   }
 
   .dropdown-item {
-    @apply w-full px-4 py-2 text-left text-sm transition-all hover:bg-neutral-100;
+    @apply w-full px-4 py-2 text-left text-xs transition-all hover:bg-neutral-100;
   }
 
   .dropdown-item-selected {

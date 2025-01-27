@@ -10,16 +10,17 @@ const config: Config = {
     extend: {
       fontSize: {
         // Keep default sizes and add custom ones
-        sm: ['0.875rem', '1.25rem'], // 14px
-        base: ['1rem', '1.5rem'], // 16px
-        lg: ['1.125rem', '1.75rem'], // 18px
-        xl: ['1.25rem', '1.75rem'], // 20px
-        'game-title': ['1.125rem', '1.75rem'], // 18px
-        price: ['1.25rem', '1.75rem'], // 20px
+        ag: ['16px', '20px'],
+        xs: ['20px', '24px'],
+        lg: ['18px', '20px'],
+        xl: ['24px', '28px'],
+        '2xl': ['36px', '40px'],
       },
       colors: {
-        'stroke-secondary': '##8F8F8F',
+        'stroke-secondary': '#8F8F8F',
         'stroke-primary': '#3B3B3B',
+        'text-primary': '#3B3B3B',
+        'cta-fill-primary': '#585660',
         gray: {
           medium: '#585660',
         },
