@@ -7,6 +7,7 @@ import { Game } from '@/types';
 import { cartService } from '@/services/cartService';
 import { CheckoutModal } from '@/components/CheckoutModal/CheckoutModal';
 import { motion } from 'framer-motion';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 const EmptyCart = () => {
   return (
@@ -103,12 +104,7 @@ const CartPage = () => {
         <h1 className="mb-2 text-xl font-bold md:text-2xl">Your Cart</h1>
 
         {isLoading ? (
-          <div
-            data-testid="loading-spinner"
-            className="flex min-h-[400px] items-center justify-center"
-          >
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-neutral-200 border-t-[#585660]"></div>
-          </div>
+          <LoadingSpinner />
         ) : cartItems?.length === 0 ? (
           <EmptyCart />
         ) : (

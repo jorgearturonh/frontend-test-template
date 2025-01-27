@@ -5,6 +5,7 @@ import { useGetGames } from '@/hooks/useGetGames';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { GameCard, GameCardSkeleton } from '@/components/GameCard';
 import { Dropdown } from '@/components/Dropdown';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -122,7 +123,7 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<LoadingSpinner />}>
       <HomeContent />
     </Suspense>
   );
